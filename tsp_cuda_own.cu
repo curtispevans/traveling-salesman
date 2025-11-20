@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <random>
 
 using namespace std;
 
@@ -20,7 +21,9 @@ __managed__ int block_optimal_permutation[BLOCKS];
 /////////////////// Host Functions ///////////////////
 
 __host__ int random(int l, int r) {
-  return l + rand()%(r-l+1);
+    static std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<int> dist(l, r);
+    return dist(gen);
 }
 
 __host__ void precompute_factorial() {
@@ -321,8 +324,9 @@ int main(int argc, char **argv) {
         cost += matrix[path[i]*N + path[i-1]];
     }
     printf("Path cost: %d \n", cost);
-	printf("Matrix: \n");
-	print_matrix(matrix, N);
+
+    printf("Matrix \n");
+    print_matrix(matrix, N);
 
     // printing the run-time
     // printf("Time taken: %f s\n", milliseconds*0.001);
