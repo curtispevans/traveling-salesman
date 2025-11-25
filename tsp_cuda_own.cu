@@ -3,8 +3,8 @@
 
 using namespace std;
 
-const int THREADS_PER_BLOCK = 1024;
-const int BLOCKS = 50;
+const int THREADS_PER_BLOCK = 96;
+const int BLOCKS = 1024;
 
 const int MAXN = 16;
 const int INF = 1e9;
