@@ -3,7 +3,7 @@
 using namespace std;
 
 const int THREADS_PER_BLOCK = 1024;
-const int BLOCKS = 50;
+const int BLOCKS = 255;
 
 const int MAXN = 16;
 const int INF = 1e9;
@@ -251,7 +251,7 @@ int main(int argc, char **argv) {
 
     assign_edge_weights(matrix, N);
 
-    // print_matrix(matrix, N);
+    print_matrix(matrix, N);
 	
 	for (int i = 0; i < BLOCKS; i++){
 		block_optimal_values[i] = INF;
@@ -279,7 +279,6 @@ int main(int argc, char **argv) {
     // Launch the TSP kernel
 	tsp_cuda<<<BLOCKS, THREADS_PER_BLOCK>>>(dev_matrix, dev_path, dev_factorial, N);
 
-	cudaDeviceSynchronize();
 	cudaDeviceSynchronize();
 
 	int optimal_cost = INF;
@@ -321,8 +320,6 @@ int main(int argc, char **argv) {
         cost += matrix[path[i]*N + path[i-1]];
     }
     printf("Path cost: %d \n", cost);
-	printf("Matrix: \n");
-	print_matrix(matrix, N);
 
     // printing the run-time
     // printf("Time taken: %f s\n", milliseconds*0.001);
