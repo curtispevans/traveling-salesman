@@ -4,7 +4,7 @@
 using namespace std;
 
 const int THREADS_PER_BLOCK = 96;
-const int BLOCKS = 1024;
+const int BLOCKS = 100;
 
 const int MAXN = 16;
 const int INF = 1e9;
@@ -283,7 +283,7 @@ int main(int argc, char **argv) {
 	tsp_cuda<<<BLOCKS, THREADS_PER_BLOCK>>>(dev_matrix, dev_path, dev_factorial, N);
 
 	cudaDeviceSynchronize();
-	cudaDeviceSynchronize();
+	
 
 	int optimal_cost = INF;
 	long long optimal_permutation;
