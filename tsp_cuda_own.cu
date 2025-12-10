@@ -26,6 +26,10 @@ __host__ int random(int l, int r) {
     return dist(gen);
 }
 
+// __host__ int random(int l, int r) {
+//   return l + rand()%(r-l+1);
+// }
+
 __host__ void precompute_factorial() {
 	factorial[0] = 1;
 
@@ -123,14 +127,16 @@ __device__ int find_path_cost(int* matrix, int* arr, int arrsize, int n) {
 
 //Input array should be sorted
 __host__ __device__ bool nth_permutation(int *arr, int arrsize, long long n) {
-	if(n>fact(arrsize))return false;
+	// if(n>fact(arrsize))return false;
 
     // Assuming arrSize = N+1
 	bool taken[MAXN];
 
 	for(int i=0; i<arrsize; i++) taken[i] = false;
 	
-	int *ans = new int[arrsize];
+	// int *ans = new int[arrsize];
+	int ans_local[MAXN];
+	int* ans = ans_local;
 
 	for(int i=0; i<arrsize; i++) {
 		int cn = 1;
@@ -160,7 +166,7 @@ __host__ __device__ bool nth_permutation(int *arr, int arrsize, long long n) {
 	for(int i=0; i<arrsize; i++) {
 		arr[i] = ans[i];
 	}
-	free(ans);
+	// free(ans);
 	return true;
 }
 
