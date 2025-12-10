@@ -4,7 +4,7 @@ using namespace std;
 
 const int MAXN = 16;                 // Maximum number of cities
 const int THREADS_PER_BLOCK = 256;   // Threads per block
-const int BLOCKS = 64;               // Number of blocks
+const int BLOCKS = 255;               // Number of blocks
 
 __managed__ long long factorial[MAXN+1];
 __managed__ int block_best_cost[BLOCKS];
@@ -175,7 +175,7 @@ int main(int argc, char** argv){
 
     cout << "Minimum cost: " << best_cost << "\n";
     cout << "Path: ";
-    for(int i=0;i<N + 1;i++) cout << final_perm[i] << " ";
+    for(int i=0;i<N;i++) cout << final_perm[i] << " ";
     cout << final_perm[0] << "\n"; // return to start
 
     delete[] h_matrix;
